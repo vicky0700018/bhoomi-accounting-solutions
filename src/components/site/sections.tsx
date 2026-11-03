@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronLeft, ChevronRight, Mail, MapPin, Minus, Phone, Plus, Quote } from "lucide-react";
 import { Counter, Icon, Img, Reveal, SectionHead, fmtDate } from "./ui";
 import { useStore } from "@/lib/store";
-import { faqs, processSteps, whyCards, u } from "@/lib/data";
+import { processSteps, whyCards, u } from "@/lib/data";
 
 export function Hero() {
   const { data } = useStore();
@@ -267,13 +267,14 @@ export function BlogGrid({ limit }: { limit?: number }) {
 }
 
 export function Faq() {
+  const { data } = useStore();
   const [open, setOpen] = useState(0);
   return (
     <section className="py-24">
       <div className="container-x grid gap-12 lg:grid-cols-[1fr_1.5fr]">
         <SectionHead center={false} eyebrow="FAQ" title="Frequently asked questions" text="Can't find what you're looking for? Our team is happy to help." />
         <div className="divide-y border-y">
-          {faqs.map((f, k) => (
+          {data.faqs.map((f, k) => (
             <div key={f.q}>
               <button className="flex w-full items-center justify-between gap-4 py-5 text-left font-semibold text-primary" onClick={() => setOpen(open === k ? -1 : k)} aria-expanded={open === k}>
                 {f.q}{open === k ? <Minus className="h-5 w-5 shrink-0 text-gold" /> : <Plus className="h-5 w-5 shrink-0 text-gold" />}
